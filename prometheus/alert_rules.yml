@@ -1,0 +1,22 @@
+groups:
+  - name: "example-alerts"
+    rules:
+      - alert: "High CPU Usage"
+        expr: avg(rate(node_cpu_seconds_total[1m])) * 100 > 80
+        for: 1m
+        labels:
+          severity: "warning"
+        annotations:
+          summary: "High CPU Usage detected"
+          description: "CPU usage is above 80% for more than 1 minute."
+  - name: test-alerts
+    rules:
+      - alert: "Test_Alert"
+        expr: vector(1)  # 항상 1을 반환하는 테스트용 알람
+        for: 10s  # 10초 이상 유지 시 알람 발생
+        labels:
+          severity: "critical"
+        annotations:
+          summary: "This is a test alert"
+          description: "This is a manually triggered test alert from Prometheus."
+
