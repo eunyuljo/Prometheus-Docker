@@ -1,11 +1,13 @@
 region: ap-northeast-2
 role_arn: arn:aws:iam::977099011692:role/Prometheus-CloudWatch-Role
+delay_seconds: 300  # CloudWatch 메트릭 지연 고려
+period_seconds: 300  # 기본값 설정
 metrics:
     #EC2
   - aws_namespace: AWS/EC2
     aws_metric_name: CPUUtilization
     aws_dimensions: [InstanceId]
-    aws_statistics: [Average]
+    aws_statistics: [Average, Maximum]
     period_seconds: 300
     range_seconds: 600
     #RDS
